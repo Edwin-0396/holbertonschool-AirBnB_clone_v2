@@ -15,7 +15,7 @@ def do_pack():
     now = datetime.datetime.now()
 
     name = 'web_static_{}{}{}{}{}{}.tgz'.format(
-            now.year, now.month, now.day, now.hour, now.minute, now.second)
+        now.year, now.month, now.day, now.hour, now.minute, now.second)
     result = local("mkdir -p versions && tar -cvzf versions/{}\
                     web_static".format(name))
     if result.succeeded:
