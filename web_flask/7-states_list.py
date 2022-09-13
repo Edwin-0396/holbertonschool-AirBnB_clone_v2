@@ -9,11 +9,13 @@ from models.state import State
 
 app = Flask(__name__)
 
+
 @app.route('/states_list', strict_slashes=False)
 def display_states():
     """displays states"""
     state_dict = storage.all(State)
     return render_template('7-states_list.html', state_dict=state_dict)
+
 
 @app.teardown_appcontext
 def teardown_db(self):
