@@ -35,17 +35,17 @@ class DBStorage:
 
     def all(self, cls=None):
         """All method"""
-        dict_cls = {}
-        if cls:
-            query = self.__session.query(cls).all()
-            for key, value in query.items():
-                dict_cls[key] = value
+        obj_dict = {}
+        if cls is None:
+            for obj in self.__session.query(City, State, User, Place,
+                                            Review, Amenity).all():
+                key = "{}.{}".format(type(obj).__name__, obj.id)
+                obj_dict[key] = obj
         else:
-            for CLS in self.classes:
-                query = self.__session.query(CLS).all()
-                for key, value in query.items():
-                    dict_cls[key] = value
-        return (dict_cls)
+            for obj in self.__session.query(cls).all():
+                key = "{}.{}".format(cls.__name__, obj.id)
+                obj_dict[key] = obj
+        return obj_dict
 
     def new(self, obj):
         """New method"""
@@ -70,4 +70,4 @@ class DBStorage:
 
     def close(self):
         """Reload method"""
-        self.__session.remove()
+        self.__session.close()
