@@ -65,7 +65,7 @@ class FileStorage:
             return
         """print(FileStorage.__objects.keys())"""
         if obj in FileStorage.__objects.values():
-            key = "{}.{}".format(type(obj).__name__,obj.id)
+            key = "{}.{}".format(type(obj).__name__, obj.id)
             del FileStorage.__objects[key]
 
     def close(self):
